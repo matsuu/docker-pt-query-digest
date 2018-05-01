@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-ARG VERSION=3.0.6
+ARG VERSION=3.0.9
 ARG ARCH=x86_64
 
 ADD https://www.percona.com/downloads/percona-toolkit/${VERSION}/binary/tarball/percona-toolkit-${VERSION}_${ARCH}.tar.gz /
