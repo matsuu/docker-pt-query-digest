@@ -1,21 +1,18 @@
 FROM alpine:latest
 
-ARG VERSION=3.0.9
-ARG ARCH=x86_64
-
-ADD https://www.percona.com/downloads/percona-toolkit/${VERSION}/binary/tarball/percona-toolkit-${VERSION}_${ARCH}.tar.gz /
+ADD http://percona.com/get/percona-toolkit.tar.gz /
 RUN \
   apk update && \
   apk add perl perl-dbd-mysql && \
   apk add --virtual=build make && \
-  tar zxf /percona-toolkit-${VERSION}_${ARCH}.tar.gz && \
+  tar zxf /percona-toolkit.tar.gz && \
   ( \
-    cd percona-toolkit-${VERSION} && \
+    cd percona-toolkit-* && \
     perl Makefile.PL && \
     make && \
     make install \
   ) && \
-  rm -rf percona-toolkit-${VERSION}_${ARCH}.tar.gz percona-toolkit-${VERSION} && \
+  rm -rf percona-toolkit* && \
   apk del --purge build
 
 ENTRYPOINT ["pt-query-digest"]
